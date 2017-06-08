@@ -1,0 +1,28 @@
+---
+# This test generates a playbook using the prism role and verifies the result.
+
+- hosts: localhost
+  roles:
+    - prism
+    #- { role: prism,
+    #    target_definitions_dir: "{{ lookup('env', 'PWD') }}/tests/targets",
+    #    playbook_template_dir: "{{ lookup('env', 'PWD') }}/templates",
+    #    generated_playbook: "{{ lookup('env', 'PWD') }}/tests/01-out"
+    #  }
+
+  vars:
+    target_definitions_dir: "{{ lookup('env', 'PWD') }}/tests/targets"
+    playbook_templates_dir: "{{ lookup('env', 'PWD') }}/templates"
+    generated_playbook: "{{ lookup('env', 'PWD') }}/tests/out"
+    expected_playbook: "{{ lookup('env', 'PWD') }}/tests/terminate_connection.expected"
+    target: ceph_cluster
+    operation: terminate_connection
+    params:
+      volume_id: vol
+
+  tasks:
+  - name: Compare playbooks
+    shell: diff {{ generated_playbook }} {{ expected_playbook }}
+
+  - name: Clean up
+    file: path="{{ generated_playbook }}" state=absent

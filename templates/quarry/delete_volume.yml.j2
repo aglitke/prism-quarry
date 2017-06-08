@@ -1,0 +1,13 @@
+- hosts: {{ target_host }}
+  remote_user: {{ target_user }}
+
+  roles:
+  - quarry
+
+  tasks:
+  - name: Delete a volume
+    quarry_volume:
+      backend: {{ backend }}
+      config: {{ backend_config }}
+      state: absent
+      id: {{ params.id }}

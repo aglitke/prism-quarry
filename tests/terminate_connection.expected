@@ -1,0 +1,14 @@
+- hosts: host.example.com
+  remote_user: admin
+
+  roles:
+  - quarry
+
+  tasks:
+  - name: Terminate a volume connection
+    quarry_connection:
+      backend: rbd
+      config: {u'log': u'/tmp/quarry.log', u'rbd_cluster_name': u'ceph', u'rbd_secret_uuid': u'a735a6a3-a8bf-4e85-a615-a67bcab23785', u'rbd_ceph_conf': u'/etc/ceph/ceph.conf', u'rbd_pool': u'volumes', u'rbd_user': u'admin'}
+      state: absent
+      volume_id: vol
+      initiator: null

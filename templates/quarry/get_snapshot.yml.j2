@@ -1,0 +1,14 @@
+- hosts: {{ target_host }}
+  remote_user: {{ target_user }}
+
+  roles:
+  - quarry
+
+  tasks:
+  - name: Create a snapshot
+    quarry_snapshot:
+      backend: {{ backend }}
+      config: {{ backend_config }}
+      state: present
+      id: {{ params.id }}
+    check_mode: yes

@@ -1,0 +1,11 @@
+---
+target_host: host.example.com
+target_user: admin
+backend: rbd
+backend_config:
+  log: /tmp/quarry.log
+  rbd_user: admin
+  rbd_ceph_conf: /etc/ceph/ceph.conf
+  rbd_cluster_name: ceph
+  rbd_pool: volumes
+  rbd_secret_uuid: a735a6a3-a8bf-4e85-a615-a67bcab23785

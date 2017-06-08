@@ -1,0 +1,14 @@
+- hosts: {{ target_host }}
+  remote_user: {{ target_user }}
+
+  roles:
+  - quarry
+
+  tasks:
+  - name: Initialize a volume connection
+    quarry_connection:
+      backend: {{ backend }}
+      config: {{ backend_config }}
+      state: present
+      volume_id: {{ params.volume_id }}
+      initiator: {{ params.initiator | default('null') }}
